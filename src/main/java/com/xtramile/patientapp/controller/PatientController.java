@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import com.xtramile.patientapp.dto.PatientDTO;
 import com.xtramile.patientapp.entity.Patient;
 import com.xtramile.patientapp.service.PatientService;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
@@ -38,7 +40,21 @@ public class PatientController {
     @Autowired
     private ModelMapper modelMapper;
     
-    @GetMapping("/")
+    @GetMapping("/{id}")
+    public ResponseEntity<PatientDTO> getPatientById(@PathVariable long id) {
+    	
+		try {
+	    	
+	    	Patient patient = patientService.getPatient(id);
+			
+	        return new ResponseEntity<>(convertToDto(patient), HttpStatus.OK);
+	        
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+    
+    @GetMapping("")
     public ResponseEntity<Map<String, Object>> getPatients(
     		 @RequestParam(required = false) String pid,
              @RequestParam(required = false) String name,
@@ -93,8 +109,14 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable Long id) {
-    	patientService.deletePatient(id);
-
+    	try {
+	    	
+    		patientService.deletePatient(id);
+   
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    	
         return new ResponseEntity<String>("Patient is deleted successfully", HttpStatus.OK);
     }
     
