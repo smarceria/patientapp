@@ -32,7 +32,6 @@ import com.xtramile.patientapp.entity.AustralianAddress;
 import com.xtramile.patientapp.entity.Patient;
 import com.xtramile.patientapp.service.PatientService;
 
-//@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(PatientController.class)
@@ -115,8 +114,6 @@ public class PatientControllerTest {
 	    
 
 	}
-	
-	
 	
 	@Test
 	public void testGetPatient() throws Exception {

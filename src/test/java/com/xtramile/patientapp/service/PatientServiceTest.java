@@ -105,34 +105,6 @@ public class PatientServiceTest {
         
         assertPatient(patient1, retrievedPatient);
     }
-
-    /*
-    @Test
-    public void testDeletePatient() {
-        long patientId = 1L;
-        when(patientRepository.existsById(patientId)).thenReturn(true);
-
-        patientService.deletePatient(patientId);
-
-        verify(patientRepository).deleteById(patientId);
-    }
-	*/
-    
-    /*
-    @Test
-    public void testUpdatePatient() {
-        long patientId = 1L;
-        Patient patient = new Patient();
-        when(patientRepository.existsById(patientId)).thenReturn(true);
-        when(patientRepository.save(patient)).thenReturn(patient);
-
-        Patient updatedPatient = patientService.updatePatient(patientId, patient);
-
-        assertNotNull(updatedPatient);
-        assertEquals(patient, updatedPatient);
-    }
-	*/
-    
     
     
     @Test
