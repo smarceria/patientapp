@@ -29,7 +29,6 @@ import com.xtramile.patientapp.dto.PatientDTO;
 import com.xtramile.patientapp.entity.Patient;
 import com.xtramile.patientapp.service.PatientService;
 
-@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
@@ -40,6 +39,7 @@ public class PatientController {
     @Autowired
     private ModelMapper modelMapper;
     
+    @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<PatientDTO> getPatientById(@PathVariable long id) {
     	
@@ -54,6 +54,7 @@ public class PatientController {
 		}
 	}
     
+    @CrossOrigin(origins="*")
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getPatients(
     		 @RequestParam(required = false) String pid,
@@ -84,7 +85,8 @@ public class PatientController {
 		}
 	}
 
-    @PostMapping("/")
+    @CrossOrigin(origins="*")
+    @PostMapping("")
     public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientDTO patientDto) throws ParseException {
     	Patient patient = convertToEntity(patientDto);
     	
@@ -93,6 +95,7 @@ public class PatientController {
     	return new ResponseEntity<>(convertToDto(savedPatient), HttpStatus.CREATED);
     }
     
+    @CrossOrigin(origins="*")
     @PutMapping("/{id}")
     public ResponseEntity<PatientDTO> updatePatient(@PathVariable Long id, @RequestBody PatientDTO patientDto) throws ParseException {
         
@@ -107,6 +110,7 @@ public class PatientController {
         return new ResponseEntity<>(convertToDto(updatedPatient), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable Long id) {
     	try {
